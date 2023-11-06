@@ -25,6 +25,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import FirstDemo from './component/FirstDemo';
+import MaListe from './exoList/MaListe';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -65,8 +66,10 @@ function App(): JSX.Element {
 
   return (
 
-    <FirstDemo />
-    
+    //<FirstDemo />
+
+    <MaListe />
+
     // <SafeAreaView style={backgroundStyle}>
     //   <StatusBar
     //     barStyle={isDarkMode ? 'light-content' : 'dark-content'}
