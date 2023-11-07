@@ -11,7 +11,7 @@ export default function App() {
     const evalTouch = (touche) => {
         console.log(touche)
     }
-
+//onsole.log(order)
 
   return (
     <View style={styles.container}>
@@ -21,7 +21,7 @@ export default function App() {
         </View>
          <View style={styles.body}>
             {
-                monASCII.map( (touche,i) => <BtnUnique key={i} css={i < 11 ? styles.rond : styles.carre} order={order[i]} text={touche} callBack={eval} />)
+                monASCII.map( (touche,i) => <BtnUnique key={i} css={i < 11 ? styles.rond : styles.carre} order={order[i]} text={touche} callBack={evalTouch} />)
             }
          </View>
     </View>

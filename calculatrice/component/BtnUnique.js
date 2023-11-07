@@ -2,6 +2,9 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 export default function BtnUnique({css,text,callBack,order}) {
+
+    console.log(order);
+
   return (
     <View style={[{order: order},styles.container]} >
       <Text style={[styles.touche, css]} onPress={() => callBack(text)}>{text}</Text>
@@ -20,6 +23,5 @@ const styles = StyleSheet.create({
         fontSize: 30,
         textAlign:'center',
         //flex:1,
- 
     }
 })
