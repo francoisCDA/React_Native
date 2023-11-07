@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 import FormItem from "./FormItem";
 
@@ -9,19 +9,25 @@ const MaListe = () => {
 
     const [list,setList] = useState([]);
 
+    const [detail,setDetail] = useState(-1);
+
     function rm(el) {
-        //console.log(el)
         let listCp = [...list];
-       // listCp = listCp.filter( l => l !=el )
         listCp.splice(el,1);
         setList(listCp);
     }
+
+    useEffect(()=> {
+        console.log(list)
+    }, [list])
 
     
     return ( 
         <View style={styles.container} >
 
             <FormItem visible={modal} ajouter={(item) => setList([...list,item])} fermer={() => setModal(false)} />
+
+            <DetailsItem data={details} />
         
             <Button title="Ajouter un élément" onPress={() => setModal(true)}  />
 
@@ -30,7 +36,7 @@ const MaListe = () => {
                 <FlatList  data={list} renderItem={(courses) => {
                     return (
                         <View>
-                            <Text style={styles.itemList}  onPress={() => rm(courses.index)}  >{courses.item}</Text>
+                            <Text style={styles.itemList}  onPress={() => setDetail(courses.index)}  >{courses.item.title}</Text>
                         </View>
                     )
                 }} keyExtractor={(item,index) => {
@@ -40,9 +46,7 @@ const MaListe = () => {
                 />
             </View>
         </View>
-
      );
-
     }
 
 

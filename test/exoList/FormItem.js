@@ -4,12 +4,10 @@ import React from "react";
 
 const FormItem = ({visible, ajouter , fermer}) => {
 
-
     const [titre,setTitre] = useState('');
     const [details,setDetails] = useState('');
-    const [budget,setBudget] = useState(0);
+    const [budget,setBudget] = useState('');
     
-
     const addItem = () => {
         ajouter({title: titre, details: details, budget: budget});
         fermer();
@@ -18,7 +16,7 @@ const FormItem = ({visible, ajouter , fermer}) => {
     useEffect( () => {
         setTitre('');
         setDetails('');
-        setBudget(0);
+        setBudget('');
     },[visible])
 
     return ( 
