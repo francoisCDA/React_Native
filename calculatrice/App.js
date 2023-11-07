@@ -6,7 +6,7 @@ import BtnUnique from './component/BtnUnique';
 export default function App() {
 
     const monASCII = [0,1,2,3,4,5,6,7,8,9,'.','Del','AC','^','%','/','X','-','+','='];
-    const order = [];
+    const order = [10,4,9,14,3,8,13,2,7,12,5,15,1,6,11,20,20,20,20,20,20,20,20,20];
 
     const evalTouch = (touche) => {
         console.log(touche)
@@ -20,15 +20,9 @@ export default function App() {
             <TextInput style={styles.input} />
         </View>
          <View style={styles.body}>
-            <FlatList data={monASCII} 
-                        renderItem={(touche) => {
-                            return (
-                                <BtnUnique css={touche.index < 11 ? styles.rond : styles.carre} text={touche.item} callBack={eval} />
-                            )
-                        }}
-                        keyExtractor={ (item, index) => index}
-                        
-            />
+            {
+                monASCII.map( (touche,i) => <BtnUnique key={i} css={i < 11 ? styles.rond : styles.carre} order={order[i]} text={touche} callBack={eval} />)
+            }
          </View>
     </View>
   )
@@ -44,13 +38,21 @@ const styles = StyleSheet.create({
         backgroundColor:'orange'
     },
     body: {
-        flex: 5,
-        backgroundColor:'blue',
+        marginLeft:'5%',
+        flex: 3,
+        //backgroundColor:'blue',
        //width: '100%',
         //height:'65%',
-       // gap: 10,
+        gap: 10,
        // flexDirection: 'row',
         flexWrap: "wrap",
+       width: "90%",
+        //flexDirection: "row",
+    justifyContent: "space-around",
+    alignContent:'space-around',
+    
+    
+    //marginVertical: 10,
     },
     titre: {
         fontSize:30,

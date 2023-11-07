@@ -1,19 +1,25 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function BtnUnique({css,text,callBack}) {
+export default function BtnUnique({css,text,callBack,order}) {
   return (
-    <View >
+    <View style={[{order: order},styles.container]} >
       <Text style={[styles.touche, css]} onPress={() => callBack(text)}>{text}</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        width: '23%',
+        //height: '25%',
+    
+    },
     touche: {
         padding: 20,
         fontSize: 30,
         textAlign:'center',
-        
+        //flex:1,
+ 
     }
 })
