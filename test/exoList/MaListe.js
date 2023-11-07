@@ -17,7 +17,7 @@ const MaListe = () => {
 
     
     return ( 
-        <View >
+        <View style={styles.container} >
 
             <FormItem visible={modal} ajouter={(item) => setList([...list,item])} fermer={() => setModal(false)} />
         
@@ -45,14 +45,20 @@ const MaListe = () => {
 
 
     const styles = StyleSheet.create({
+        container: {
+            flex:1 //aucun effet
+        },
         flatList: {
             display:'flex',
             flexDirection:'column',
-            //alignItems: 'center'
+            width:'100%',
+            //flexWrap:"wrap",
+            //alignItems: 'center',
+            backgroundColor: '#fcf3cf'
         },
         itemList : {
-            width:"85%",
-            marginLeft:'5%',
+            width:"80%",
+            marginLeft:'10%',
             marginVertical:5,
             backgroundColor:'rgba(125,12,268,0.5)',
             padding:12,
