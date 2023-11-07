@@ -10,8 +10,10 @@ const MaListe = () => {
     const [list,setList] = useState([]);
 
     function rm(el) {
+        //console.log(el)
         let listCp = [...list];
-        listCp = listCp.filter( l => l !=el )
+       // listCp = listCp.filter( l => l !=el )
+        listCp.splice(el,1);
         setList(listCp);
     }
 
@@ -28,7 +30,7 @@ const MaListe = () => {
                 <FlatList  data={list} renderItem={(courses) => {
                     return (
                         <View>
-                            <Text style={styles.itemList}  onPress={ () => rm(courses.item)}  >{courses.item}</Text>
+                            <Text style={styles.itemList}  onPress={() => rm(courses.index)}  >{courses.item}</Text>
                         </View>
                     )
                 }} keyExtractor={(item,index) => {
@@ -49,8 +51,7 @@ const MaListe = () => {
             flex:1 //aucun effet
         },
         flatList: {
-            display:'flex',
-            flexDirection:'column',
+            flex:1, //mieux
             width:'100%',
             //flexWrap:"wrap",
             //alignItems: 'center',

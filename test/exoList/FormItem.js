@@ -1,32 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Modal, TextInput, View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 
 const FormItem = ({visible, ajouter , fermer}) => {
 
 
-    const [item,setItem] = useState('')
+    const [titre,setTitre] = useState('');
+    const [details,setDetails] = useState('');
+    const [budget,setBudget] = useState(0);
+    
 
     const addItem = () => {
-        ajouter(item);
-        setItem('');
+        ajouter({title: titre, details: details, budget: budget});
         fermer();
     }
+
+    useEffect( () => {
+        setTitre('');
+        setDetails('');
+        setBudget(0);
+    },[visible])
 
     return ( 
         <Modal visible={visible}>
             <View style={styles.container} >
             <Image
-                    // width={50}
-                    // height={50}
-                    // resizeMode='contain'
                     source={
                         require('./asset/pngegg.png')
                     }
                     style={styles.img}
             />
                 <Text style={styles.h2} >Ajouter un élément :</Text>
-                <TextInput style={styles.input} onChangeText={(txt) => {setItem(txt)}} value={item} />
+                <TextInput style={styles.input} placeholder="Titre" onChangeText={(txt) => {setTitre(txt)}} value={titre} />
+                <TextInput style={styles.input} placeholder="Détails" onChangeText={(txt) => {setDetails(txt)}} value={details} multiline={true} numberOfLines={3} />
+                <TextInput style={styles.input} placeholder="Budget" onChangeText={(txt) => {setBudget(txt)}} value={budget} />
+
 
                 <View style={styles.btnGrp} >
                     <Button title="Ajouter" onPress={addItem} style={styles.boutonAjouter} />
