@@ -13,3 +13,13 @@ android studio pour l'emulateur
 npx react-native@latest init nomduprojet
 
 npx react-native run-android
+
+
+### react-native navigation
+
+npm i @react-navigation/native
+npm install react-native-screens react-native-safe-area-context
+npm i @react-navigation/native-stack
+
+import {NAvigationContainer} from '@react-navigation/native'
+impoort { createNAtiveStackNavigator } from '@react-navigation/native/native-stack'

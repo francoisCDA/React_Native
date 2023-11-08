@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import BtnUnique from './component/BtnUnique';
 import { useState } from 'react';
 
@@ -10,29 +10,86 @@ export default function App() {
     const monASCII = ['AC',7,4,1,'.','^',8,5,2,0,'%',9,6,3,'Del','/','X','-','+','='];
     
     const [affichage,setAffichage] = useState('');
+    const [saisie, setSaisie] = useState('');
+    const [operateur,setOperateur] = useState('')
     const [operation,setOperation] = useState(0);
 
 
     const calculator = (arg) => {
 
+        console.log('arg :', arg)
         if (!isNaN(arg) || arg == '.') {
-            setAffichage(state => state + arg)
+           
+            setSaisie(state => state + arg)
         } else
         if (arg == 'Del'){
-            setAffichage(state => state.substring(0,state.length-1))
+            setSaisie(state => state.substring(0,state.length-1))
         } else
-        if (arg == 'AC'){
-            setAffichage('');
-            setOperation([]);
+        if (arg == 'AC') {
+            setOperateur('AC');
         } else
-        if (arg == '+'){
-            setOperation(state => state + arg)
+        if (arg == '=') {
+            //setSaisie(state => Number(operation) + Number(saisie));
+            
+            if (operateur == '+') {
+                setOperation(state => Number(operation) + Number(saisie))
+  
+            }
+            if (operateur == '-') {
+                setOperation(state => Number(operation) - Number(saisie))
+
+            }
+            if (operateur == 'X') {
+                setOperation(state => Number(operation) * Number(saisie))
+ 
+            }
+            if (operateur == '/') {
+                setOperation(state => Number(operation) / Number(saisie))
+
+            }
+        } else
+        {
+            setOperateur(arg)
         }
-
-
+      
     }
 
-  return (
+    useEffect( () => {
+       setAffichage(saisie)
+       console.log('saisie :',saisie);
+    },[saisie])
+
+
+    useEffect( () => {
+        console.log('operateur : ',operateur,' ','operation : ', operation)
+        if (operateur == '+') {
+            setOperation( Number(saisie))
+            setSaisie('+')
+        }
+        if (operateur == '-') {
+            setOperation( Number(saisie))
+            setSaisie('-');
+        }
+        if (operateur == 'X') {
+            setOperation(Number(saisie))
+            setSaisie('*');
+        }
+        if (operateur == '/') {
+            setOperation( Number(saisie))
+            setSaisie('/');
+        }
+        
+    },[operateur]) 
+
+    useEffect( () => {
+        console.log('operation : ', operation)
+        setSaisie(operateur)
+        
+    }, [operation])
+
+
+
+ return (
     <View style={styles.container}>
        <View style={styles.header} >
             <Text style={styles.titre}>Calcultor</Text>
@@ -40,7 +97,7 @@ export default function App() {
         </View>
          <View style={styles.body}>
             {
-                monASCII.map( (touche,i) => <BtnUnique key={i} css={ !isNaN(touche) || touche == '.' ? styles.rond : styles.carre} text={touche} callBack={calculator} />)
+                monASCII.map( (touche,i) => <BtnUnique key={i} css={ !isNaN(touche) || touche == '.' || touche =='Del' ? styles.rond : styles.carre} text={touche} callBack={calculator} />)
             }
          </View>
     </View>
