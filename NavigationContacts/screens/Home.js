@@ -11,14 +11,12 @@ const contacts = [
 const Home = ({navigation}) => {
   return (
     <View>
-        <Text>Liste de contacts :</Text>
+        <Text style={styles.titre}>Mes contacts :</Text>
         <FlatList data={contacts} renderItem={ (contact) => {
             return (
-            <View>
-                
-                <Button title={`${contact.item.first}`} onPress={ () => navigation.navigate('Details', contact.item)} />
-            </View>
-
+                <View style={styles.contact}>
+                    <Button title={`${contact.item.first}`} onPress={ () => navigation.navigate('Details', contact.item)} />
+                </View>
             )
             
         }} keyExtractor={(item,index) => {
@@ -31,4 +29,15 @@ const Home = ({navigation}) => {
 
 export default Home
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    titre : {
+        fontSize: 25,
+        marginBottom: '5%',
+    },
+    contact : {
+        marginVertical:10,
+        marginStart:'10%',
+        marginEnd:'10%',
+
+    }
+})

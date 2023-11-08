@@ -11,7 +11,7 @@ const App = () => {
   return (
     <NavigationContainer>
         <Pile.Navigator initialRouteName='Accueil'>
-            <Pile.Screen name='Accueil' component={Home} options={{headerShown: true}} />
+            <Pile.Screen name='Accueil' component={Home} options={{headerShown: false}} />
             <Pile.Screen name='Details' component={Details} />
         </Pile.Navigator>
     </NavigationContainer>    

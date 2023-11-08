@@ -17,9 +17,30 @@ npx react-native run-android
 
 ### react-native navigation
 
+
+#### Stack
 npm i @react-navigation/native
 npm install react-native-screens react-native-safe-area-context
 npm i @react-navigation/native-stack
 
 import {NAvigationContainer} from '@react-navigation/native'
-impoort { createNAtiveStackNavigator } from '@react-navigation/native/native-stack'
+import { createNAtiveStackNavigator } from '@react-navigation/native/native-stack'
+
+
+
+### navigation TAB
+
+npm i @react-navigation/native
+npm install react-native-screens react-native-safe-area-context
+npm i @react-navigation/bottom-tabs
+
+
+### navigation tiroire
+
+npm i @react-navigation/native
+npm install react-native-screens react-native-safe-area-context
+npm i @react-navigation/drawer
+npm i react-native-gesture-handler
+npm i react-native-reanimated
+
+
