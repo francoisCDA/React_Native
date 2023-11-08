@@ -1,27 +1,46 @@
-import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
+import React from 'react';
 import BtnUnique from './component/BtnUnique';
+import { useState } from 'react';
+
 
 
 export default function App() {
 
-    const monASCII = [0,1,2,3,4,5,6,7,8,9,'.','Del','AC','^','%','/','X','-','+','='];
-    const order = [10,4,9,14,3,8,13,2,7,12,5,15,1,6,11,20,20,20,20,20,20,20,20,20];
+    const monASCII = ['AC',7,4,1,'.','^',8,5,2,0,'%',9,6,3,'Del','/','X','-','+','='];
+    
+    const [affichage,setAffichage] = useState('');
+    const [operation,setOperation] = useState(0);
 
-    const evalTouch = (touche) => {
-        console.log(touche)
+
+    const calculator = (arg) => {
+
+        if (!isNaN(arg) || arg == '.') {
+            setAffichage(state => state + arg)
+        } else
+        if (arg == 'Del'){
+            setAffichage(state => state.substring(0,state.length-1))
+        } else
+        if (arg == 'AC'){
+            setAffichage('');
+            setOperation([]);
+        } else
+        if (arg == '+'){
+            setOperation(state => state + arg)
+        }
+
+
     }
-//onsole.log(order)
 
   return (
     <View style={styles.container}>
        <View style={styles.header} >
             <Text style={styles.titre}>Calcultor</Text>
-            <TextInput style={styles.input} />
+            <Text style={styles.input}>{affichage}</Text> 
         </View>
          <View style={styles.body}>
             {
-                monASCII.map( (touche,i) => <BtnUnique key={i} css={i < 11 ? styles.rond : styles.carre} order={order[i]} text={touche} callBack={evalTouch} />)
+                monASCII.map( (touche,i) => <BtnUnique key={i} css={ !isNaN(touche) || touche == '.' ? styles.rond : styles.carre} text={touche} callBack={calculator} />)
             }
          </View>
     </View>
@@ -35,7 +54,8 @@ const styles = StyleSheet.create({
     header: {
         flex: 2,
         //height:'35%',
-        backgroundColor:'orange'
+        backgroundColor:'orange',
+        justifyContent:'space-between',
     },
     body: {
         marginLeft:'5%',
@@ -61,7 +81,8 @@ const styles = StyleSheet.create({
     input : {
         width: '100%',  
         textAlign: 'right',
-        fontSize: 40,
+        fontSize: 60,
+        marginBottom: 13,
     },
     rond : {
         borderRadius: 100,
