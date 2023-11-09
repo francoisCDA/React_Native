@@ -1,11 +1,19 @@
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
+import {useState } from "react";
 
-const Formulaire = () => {
+const Formulaire = ({navigation}) => {
 
   const [titre,setTitre] = useState('');
   const [details,setDetails] = useState('');
   const [budget,setBudget] = useState('');
+
+  const btnPressed = () => {
+    navigation.navigate('home',{title:titre,details:details,budget:budget});
+    setTitre('');
+    setDetails('');
+    setBudget('');
+  }
 
   return (
     <View>
@@ -15,7 +23,7 @@ const Formulaire = () => {
         <TextInput style={styles.input} placeholder="Budget" onChangeText={(txt) => {setBudget(txt)}} value={budget} />
       </View>
       <View>
-        <Button />
+        <Button title='Ajouter' onPress={btnPressed} />
       </View>
     </View>
   )

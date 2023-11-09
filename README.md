@@ -43,4 +43,9 @@ npm i @react-navigation/drawer
 npm i react-native-gesture-handler
 npm i react-native-reanimated
 
+#### dans babel.config.js :
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'],
+  plugins: ['react-native-reanimated/plugin']
+};
 

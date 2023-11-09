@@ -1,10 +1,28 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { FlatList, StyleSheet, Text, View, Button } from 'react-native'
+import React, { useEffect, useState } from 'react'
 
-const Home = ({navigation}) => {
+const Home = ({navigation,route}) => {
 
   const [listeDeCourses,setListeDeCourses] = useState([]) 
 
+  useEffect( () => {
+    console.log('params', route.params)
+    if (route.params) {
+      console.log(route.params.title)
+      if (route.params.title != '') {
+        setListeDeCourses(list => [...list,route.params])
+      }
+      if (route.params.idx) {
+        let lst = [...listeDeCourses];
+        lst.splice(route.params.idx,1)
+        setListeDeCourses(lst)
+      }
+    }
+  },[route.params])
+
+  useEffect( () => {
+    console.log(listeDeCourses)
+  },[listeDeCourses])
 
   return (
     <View>
@@ -18,10 +36,12 @@ const Home = ({navigation}) => {
           renderItem={ (article) => {
               return (
                 <View>
-                  <Text onPress={() => navigation.navigate('details',article.item)}>{article.item.label}</Text>
+                  <Text onPress={() => navigation.navigate('details',{...article.item,idx:article.index})}>{article.item.title}</Text>
                 </View>
               )
-          }}
+          }} keyExtractor={(item,index) => {
+            return index
+        }}
         
         />
       </View>

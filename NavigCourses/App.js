@@ -15,8 +15,8 @@ const App = () => {
     <NavigationContainer>
         <Pile.Navigator initialRouteName='home'>
             <Pile.Screen name='home' component={Home} options={{headerShown: false}} />
-            <Pile.Screen name='form' component={Formulaire} option={{title: 'Ajouter un article :'}}/>
-            <Pile.Screen name='details' component={Details} option={{title: 'Détails'}} />
+            <Pile.Screen name='form' component={Formulaire} options={{title: 'Ajouter un article :'}}/>
+            <Pile.Screen name='details' component={Details} options={{title: 'Détails'}} />
 
         </Pile.Navigator>
     </NavigationContainer>
