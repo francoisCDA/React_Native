@@ -71,3 +71,51 @@ To request access to location, you need to add the following line to your app's 
 or
 
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
+
+# redux
+
+npm i @reduxjs/toolkit react-redux
+
+## dans App.js le provider
+import { provider } from 'react-redux'
+import store from './store/store.js'
+
+<Provider store={store}>
+
+</Provider>
+
+## le fichier store
+
+import configureStore 
+import data
+
+export const store configureStore({
+  reducer : {
+    data : data
+  }
+})
+
+export default store
+
+## le slice
+import {createSlice} from "@reduxjs/toolkit"
+
+const data = createSlice({
+  name : 'data',
+  initialState: {
+    lstContact:[]
+  },
+  reducer : {
+    addContact : (state,action) => {
+      state.lstContact.push(action.payload)
+    },
+    rmContact : (state,action) => {
+      state.lstContacts = lst.Contact.filter( ctc => ctc.id != action.payload)
+    }
+  }
+})
+
+export const {addContact, rmContact} = data.actions
+export default data.reducer

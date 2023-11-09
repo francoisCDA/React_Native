@@ -33,7 +33,7 @@ const AppGPS = () => {
         try {
             const dataLocation = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=LpgEQcPXeClTSFUPDlmG3efOfTkbwI8w&q=${latitude}%2C${longitude}&language=fr-FR`)
             if (dataLocation !== null) {
-               setData(dataLocation.data.Country)
+               setData(dataLocation.data)
                setPays(dataLocation.data.Country.LocalizedName)
                setLocalisation(dataLocation.data.AdministrativeArea.LocalizedName)
             }
