@@ -49,3 +49,25 @@ module.exports = {
   plugins: ['react-native-reanimated/plugin']
 };
 
+### sauvegarde des données Async Storage ~ local storage ~
+
+npm i @react-native-async-storage/async-storage
+
+import AsyncStorage from '@react-native-async-storage/async-storage' 
+
+
+
+### GPS 
+
+npm install @react-native-community/geolocation
+
+
+To request access to location, you need to add the following line to your app's AndroidManifest.xml:
+
+\android\app\src\main\AndroidManifest.xml
+
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+or
+
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
