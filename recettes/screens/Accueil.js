@@ -37,5 +37,7 @@ export default Accueil
 const styles = StyleSheet.create({
     grp : {
         flexDirection:'row',
+        justifyContent:'space-around',
+        marginVertical: 15,
     }
 })

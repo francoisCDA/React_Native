@@ -11,7 +11,7 @@ const Categorie = ({route}) => {
 
 
   return (
-    <View>
+    <View style={styles.body}>
      
       <FlatList
             data={CatMeal}
@@ -23,6 +23,7 @@ const Categorie = ({route}) => {
             keyExtractor={ (item,index) => { 
                 return index
             }}
+      
       />
 
     </View>
@@ -31,4 +32,9 @@ const Categorie = ({route}) => {
 
 export default Categorie
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    body: {
+        backgroundColor:'#e5e5e5',
+        flex:1,
+    }
+})
