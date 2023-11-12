@@ -5,15 +5,16 @@ import { useNavigation } from '@react-navigation/native'
 const Etiquette = ({cat}) => {
 
     const navigation = useNavigation();
-//cat.color
-  return (
-    <View style={styles.ombre} >
-      <Pressable onPress={() => {navigation.navigate('categorie',cat.id)}}  style={ ({pressed}) => pressed ? {backgroundColor: 'salmon', borderRadius:15} : {backgroundColor: cat.color, borderRadius:15} } >
-         <Text style={ styles.etiquette } >{cat.title}</Text>
-      </Pressable>
-    </View> 
-  )
-}
+
+      return (
+        <View style={styles.ombre} >
+          <Pressable onPress={() => {navigation.navigate('categorie',cat.id)}}  style={ ({pressed}) => pressed ? {backgroundColor: 'salmon', borderRadius:15} : {backgroundColor: cat.color, borderRadius:15} } >
+            <Text style={ styles.etiquette } >{cat.title}</Text>
+          </Pressable>
+        </View> 
+      )
+      
+    }
 
 const styles = StyleSheet.create({
     etiquette : {

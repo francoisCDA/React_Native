@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image,FlatList, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import React from 'react'
 
 import { MEALS } from '../data/data'

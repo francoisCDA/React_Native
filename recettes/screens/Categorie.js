@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, View, FlatList } from 'react-native'
 import React from 'react'
 
 import { MEALS } from '../data/data'
@@ -23,7 +23,6 @@ const Categorie = ({route}) => {
             keyExtractor={ (item,index) => { 
                 return index
             }}
-      
       />
 
     </View>
