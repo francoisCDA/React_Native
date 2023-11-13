@@ -1,10 +1,21 @@
 import { StyleSheet, View, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Etiquette from '../components/Etiquette'
 import { CATEGORIES } from '../data/data'
+import { useDispatch } from 'react-redux'
+import { getFavoris } from '../slice/bookmarkSlice'
 
 const Accueil = () => {
+
+    const dispatch = useDispatch();
+
+
+    useEffect( () => {
+        dispatch(getFavoris())
+    },[])
+
+
   return (
     <ScrollView>
         <View style={styles.grp}>

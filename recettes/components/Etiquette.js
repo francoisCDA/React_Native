@@ -8,7 +8,7 @@ const Etiquette = ({cat}) => {
 
       return (
         <View style={styles.ombre} >
-          <Pressable onPress={() => {navigation.navigate('categorie',cat.id)}}  style={ ({pressed}) => pressed ? {backgroundColor: 'salmon', borderRadius:15} : {backgroundColor: cat.color, borderRadius:15} } >
+          <Pressable onPress={() => {navigation.navigate('categorie',{categories:cat.id,favoris:[]})}}  style={ ({pressed}) => pressed ? {backgroundColor: 'salmon', borderRadius:15} : {backgroundColor: cat.color, borderRadius:15} } >
             <Text style={ styles.etiquette } >{cat.title}</Text>
           </Pressable>
         </View> 

@@ -7,7 +7,13 @@ import CardRecette from '../components/CardRecette'
 
 const Categorie = ({route}) => {
 
-    const CatMeal = MEALS.filter( mil => mil.categoryIds.includes(route.params))
+  let CatMeal ;
+
+  if (route.params.favoris.length == 0 ) {
+      CatMeal = MEALS.filter( mil => mil.categoryIds.includes(route.params.categories))
+  } else {
+      CatMeal = MEALS.filter( mil => route.params.favoris.includes(mil.id) )
+  }
 
 
   return (
