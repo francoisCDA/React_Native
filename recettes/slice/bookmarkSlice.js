@@ -18,7 +18,11 @@ export const getFavoris = createAsyncThunk(
     async () => {
         try {
             const favoris = await AsyncStorage.getItem('recettesFavorites')
-            return JSON.parse(favoris);
+            if (favoris != null) {
+                return JSON.parse(favoris);
+            } else {
+                return []
+            }
         } catch (error) {
             console.error(error);
         }
