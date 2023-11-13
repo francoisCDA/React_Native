@@ -1,9 +1,26 @@
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
-const Etiquette = ({nom,types,spriteUrl}) => {
+const Etiquette = ({nom,types,spriteUrl,speciesUrl}) => {
+
+        
+    //, {backgroundColor: pokespecies[`${id}`].couleur }
+
+    const [couleur,setCouleur] = useState('ligthgrey') ;
+
+     useEffect(() => {
+        axios.get(speciesUrl)
+        .then (reponse => {
+            setCouleur(reponse.data.color.name)
+        }).catch (error => console.log(error))
+        
+    }, []);
+ 
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,{backgroundColor: couleur}]}>
         <View>
             <Text>{nom}</Text>
             <FlatList 
@@ -35,7 +52,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection:'row',
         justifyContent:'space-around',
-        backgroundColor:'lightgrey',
+     
         width:'40%',
         margin:10,
         padding:12,

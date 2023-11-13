@@ -22,6 +22,15 @@ function pokeExtractData(dataBrut) {
     return newPoke;
 }
 
+function speciesExtractData(dataBrut) {
+
+    const dataSpecies = {};
+
+    dataSpecies.couleur = dataBrut.color.name
+
+    return dataSpecies;
+}
+
 
 export const axiosGetPokemonByUrl = createAsyncThunk(
     'pokemon/axiosGetPokemonByUrl',
@@ -35,14 +44,25 @@ export const axiosGetPokemonByUrl = createAsyncThunk(
     }
 )
 
-
-
+export const axiosDataSpecies = createAsyncThunk(
+    'pokemon/axiosDataSpecies',
+    async (id) => {
+        try {
+            const reponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`);
+            return {id:id,data:reponse.data}
+        } catch (error) {
+            console.log('axiosDataSpecies', id)
+            console.log(error);
+        }
+    }
+)
 
 
 const pokeSlice = createSlice({
     name: 'pokemon',
     initialState: {
         pokedex: [],
+        pokespecies: [],
         pokeball: [],
     },
     reducers: {
@@ -51,8 +71,13 @@ const pokeSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(axiosGetPokemonByUrl.fulfilled, (state,action) => {
             const pokeData = pokeExtractData(action.payload);
-            console.log(pokeData);
             state.pokedex.push(pokeData);
+        })
+        builder.addCase(axiosDataSpecies.fulfilled, (state,action) => {
+            const dataSpecies = speciesExtractData(action.payload.data);
+
+            state.pokedex[`${action.payload.id}`] = dataSpecies;
+
         })
     }
 })
