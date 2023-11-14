@@ -10,7 +10,7 @@ import Home from './screens/Home'
 import Pokedex from './screens/Pokedex'
 import Pokemon from './screens/Pokemon'
 import Pokeball from './screens/Pokeball'
-
+import BtnPokeBall from './components/details/BtnPokeBall'
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +22,7 @@ const App = () => {
             <Stack.Navigator initialRouteName='home' >
                 <Stack.Screen name='home' component={Home} options={{headerShown: false}} />
                 <Stack.Screen name='pokedex' component={Pokedex} options={{title:'Pokedex'}} />
-                <Stack.Screen name='pokemon' component={Pokemon} />
+                <Stack.Screen name='pokemon' component={Pokemon} options={{headerRight:() => <BtnPokeBall/> }} />
                 <Stack.Screen name='pokeball' component={Pokeball} options={{title:'Vos Pokemons'}} />
             </Stack.Navigator>
         </NavigationContainer>

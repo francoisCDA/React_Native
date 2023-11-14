@@ -8,9 +8,13 @@ const PokSkills = ({data, couleur}) => {
             data={data}
             keyExtractor={(item,index) => index }
             renderItem={ ({item}) => {
-                return (
+
+                    const color = (couleur == 'white' || couleur == 'yellow'  || couleur == 'pink' ) ? {color:"#222"} : {color:"#eee"}
+
+                   return (
+
                     <View>
-                        <Text style={[styles.skill, {backgroundColor: couleur}]}>{item}</Text>
+                        <Text style={[styles.skill, {backgroundColor: couleur},color]}>{item}</Text>
                     </View>
                 )
             }}
@@ -31,7 +35,7 @@ const styles = StyleSheet.create({
     skill : {
         padding:9,
         marginHorizontal:2,
-        color:'white',
+        //color:'white',
         borderRadius:10,
         fontWeight:'800'
     }

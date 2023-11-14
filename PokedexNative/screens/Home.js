@@ -12,9 +12,7 @@ const Home = ({navigation}) => {
     const dispatch = useDispatch();
 
     useEffect( () => {
-      
-      console.log('useEffect');
-        
+              
         axios.get('https://pokeapi.co/api/v2/pokemon?offset=10&limit=50)')
         .then (reponse => {
             reponse.data.results.forEach( poke => {

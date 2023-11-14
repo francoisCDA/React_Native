@@ -2,15 +2,17 @@ import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React from 'react'
 
 
-const TypeList = ({types}) => {
+const TypeList = ({types, css }) => {
 
   return (
     <>
     {types.map( (t,i) => {
                     const color = getTypeCouleur(t)
                     return (
+                        
+
                         <View key={i} >
-                            <Text style={[styles.type,{backgroundColor:color}]}>{t}</Text>
+                            <Text style={[styles.type,{backgroundColor:color},css]}>{t}</Text>
                         </View>
                     )
     })}        
@@ -35,11 +37,9 @@ export default TypeList
 
 const styles = StyleSheet.create({
     type: {
-        padding:6,
-        textAlign:'center',
-        fontSize:16,
         marginBottom:5,
         borderRadius:15,
+        textAlign:'center',
         fontWeight:'600',
         color:'#111'
     }

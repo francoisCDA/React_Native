@@ -24,6 +24,8 @@ const Pokedex = () => {
         keyExtractor={ (item, index) => index }
         renderItem={ ({item}) => <Etiquette nom={item.nom} types={item.types} spriteUrl={item.image} speciesUrl={item.speciesUrl} /> }
         numColumns={2}
+        showsVerticalScrollIndicator={false}
+        //contentContainerStyle={{backgroundColor:'orange'}}
     />
 
 
@@ -36,6 +38,9 @@ export default Pokedex
 const styles = StyleSheet.create({
     container: {
         width:'100%',
-        alignItems:'center',
+        backgroundColor:'rbga(255,200,20,0.8)',
+      //  alignItems:'center',
+         
     }
+    
 })

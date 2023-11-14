@@ -84,10 +84,16 @@ const pokeSlice = createSlice({
            // console.log(state.pokedex[idx]);
 
             state.pokedex[idx] = { ...state.pokedex[idx], ...action.payload.data} ;
-            console.log(state.pokedex[idx]);
+           // console.log(state.pokedex[idx]);
         },
         saveEvolutionChain : (state,action) => {
             state.pokespecies[action.payload.url] = action.payload.chain;
+        },
+        addToPokeball: (state,action) => {
+            state.pokeball.push(action.payload)
+        },
+        rmToPokeball: (state,action) => {
+            state.pokeball.splice(action.payload,1)
         }
     },
     extraReducers: (builder) => {
@@ -96,7 +102,7 @@ const pokeSlice = createSlice({
             if (!state.pokedex.includes(state.pokedex.find( poke => poke.nom == pokeData.nom))) {
                 state.pokedex.push(pokeData);
             } else {
-                console.log('déjà connu ', state.pokedex.find( poke => poke.nom == pokeData.nom))
+              //  console.log('déjà connu ', state.pokedex.find( poke => poke.nom == pokeData.nom))
             }
             
         })
@@ -107,12 +113,12 @@ const pokeSlice = createSlice({
         })
         builder.addCase(axiosGetExtraPokemon.fulfilled, (state,action) => {
             const pokeData = pokeExtractData(action.payload);
-            console.log('extra.pokemon ',pokeData.image);
+          //  console.log('extra.pokemon ',pokeData.image);
             state.pokedexExtra[pokeData.nom] = pokeData.image;
         })
     }
 })
 
 
-export const { saveDataSpecies, saveEvolutionChain } = pokeSlice.actions ;
+export const { saveDataSpecies, saveEvolutionChain, addToPokeball, rmToPokeball } = pokeSlice.actions ;
 export default pokeSlice.reducer ;
