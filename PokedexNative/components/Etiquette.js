@@ -1,48 +1,60 @@
-import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Image, Pressable } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { saveDataSpecies } from '../slices/pokeSlice';
+import TypeList from './TypeList';
 
 const Etiquette = ({nom,types,spriteUrl,speciesUrl}) => {
 
-        
-    //, {backgroundColor: pokespecies[`${id}`].couleur }
+    const dispatch = useDispatch();
+    const netscape = useNavigation();
 
-    const [couleur,setCouleur] = useState('ligthgrey') ;
+    const {pokedex} = useSelector(state => state.pokemon )
+    
+    const [species,setSpecies] = useState({couleur:'ligthgrey'}) ;
 
      useEffect(() => {
-        axios.get(speciesUrl)
-        .then (reponse => {
-            setCouleur(reponse.data.color.name)
-        }).catch (error => console.log(error))
+
+        const pokemon = pokedex.find( poke => poke.nom == nom )
+
+        if (pokemon.couleur == null){
+            axios.get(speciesUrl)
+            .then (reponse => {
+                let newspecies = {};
+                newspecies.couleur = reponse.data.color.name ;
+                const flavTxtDoublons = reponse.data.flavor_text_entries.filter( txt => txt.language.name == 'fr').map(txt => txt.flavor_text);
+                newspecies.flavorTextFr = flavTxtDoublons.filter( (txt,i) => flavTxtDoublons.indexOf(txt) == i )
+                newspecies.evolutionChainUrl = reponse.data.evolution_chain.url;
+    
+                setSpecies(newspecies);
+                dispatch(saveDataSpecies({name:nom,data:newspecies}))
+            }).catch (error => console.log(error))
+        } else {
+            setSpecies({couleur:pokemon.couleur});
+            console.log('pokemon déjà connu');
+        }
+
         
     }, []);
  
 
   return (
-    <View style={[styles.container,{backgroundColor: couleur}]}>
-        <View>
-            <Text>{nom}</Text>
-            <FlatList 
-                data={types}
-                keyExtractor={(item,index) => index}
-                renderItem={ ({item}) => {
-                    return (
-                        <View>
-                            <Text>{item}</Text>
-                        </View>
-                    )
-                }}
-            />
+      <View style={[styles.container,{backgroundColor: species.couleur}]}>
+            <Pressable onPress={() => netscape.navigate('pokemon',nom)} >
+                <View>
+                    <Text>{nom}</Text>
+                    <TypeList types={types} />
+                </View>
+                <View>
+                    <Image 
+                        source={{uri:spriteUrl}}
+                        style={styles.sprite}
+                    />
+                </View>
+            </Pressable>
         </View>
-        <View>
-            <Image 
-                source={{uri:spriteUrl}}
-                style={styles.sprite}
-            />
-        </View>
-
-    </View>
   )
 }
 

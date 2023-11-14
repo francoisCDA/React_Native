@@ -62,16 +62,27 @@ const pokeSlice = createSlice({
     name: 'pokemon',
     initialState: {
         pokedex: [],
-        pokespecies: [],
+        pokespecies: {},
         pokeball: [],
     },
     reducers: {
+        saveDataSpecies : (state,action) => {
+            const idx = state.pokedex.findIndex( poke => poke.nom == action.payload.name)
+           // console.log(state.pokedex[idx]);
 
+            state.pokedex[idx] = { ...state.pokedex[idx], ...action.payload.data} ;
+            console.log(state.pokedex[idx]);
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(axiosGetPokemonByUrl.fulfilled, (state,action) => {
             const pokeData = pokeExtractData(action.payload);
-            state.pokedex.push(pokeData);
+            if (!state.pokedex.includes(state.pokedex.find( poke => poke.nom == pokeData.nom))) {
+                state.pokedex.push(pokeData);
+            } else {
+                console.log('déjà connu ', state.pokedex.find( poke => poke.nom == pokeData.nom))
+            }
+            
         })
         builder.addCase(axiosDataSpecies.fulfilled, (state,action) => {
             const dataSpecies = speciesExtractData(action.payload.data);
@@ -83,5 +94,5 @@ const pokeSlice = createSlice({
 })
 
 
-
-export default pokeSlice.reducer
+export const { saveDataSpecies } = pokeSlice.actions ;
+export default pokeSlice.reducer ;
