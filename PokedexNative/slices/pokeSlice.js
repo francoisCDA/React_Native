@@ -72,6 +72,9 @@ const pokeSlice = createSlice({
 
             state.pokedex[idx] = { ...state.pokedex[idx], ...action.payload.data} ;
             console.log(state.pokedex[idx]);
+        },
+        saveEvolutionChain : (state,action) => {
+            state.pokespecies[action.payload.url] = action.payload.chain;
         }
     },
     extraReducers: (builder) => {
@@ -94,5 +97,5 @@ const pokeSlice = createSlice({
 })
 
 
-export const { saveDataSpecies } = pokeSlice.actions ;
+export const { saveDataSpecies, saveEvolutionChain } = pokeSlice.actions ;
 export default pokeSlice.reducer ;

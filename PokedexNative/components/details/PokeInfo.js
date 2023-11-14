@@ -4,11 +4,15 @@ import React from 'react'
 const PokeInfo = ({flavorText}) => {
   return (
     <View>
-        <FlatList 
+        {
+            flavorText.map( (txt,i) => <Text key={i} >{txt.split('\n').join(' ')}</Text> )
+        }
+
+  {/*       <FlatList 
             data={flavorText}
             keyExtractor={ (item,index) => index}
             renderItem={({item}) => <Text>{item.split('\n').join(' ')}</Text> }       
-        />
+        /> */}
 
     </View>
   )

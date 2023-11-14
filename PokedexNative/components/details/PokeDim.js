@@ -6,11 +6,11 @@ const PokeDim = ({taille, poids}) => {
     <View style={styles.container}>
         <View style={styles.subContainer}>
             <Text style={styles.title}>Taille</Text>
-            <Text style={styles.data}>{taille * 10}cm</Text>
+            <Text style={styles.data}>{taille * 10} cm</Text>
         </View>
         <View style={styles.subContainer}>
             <Text style={styles.title}>Poids</Text>
-            <Text style={styles.data}>{poids / 10}kg </Text>
+            <Text style={styles.data}>{poids / 10} kg </Text>
         </View>
     </View>
   )

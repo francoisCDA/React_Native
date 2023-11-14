@@ -6,9 +6,20 @@ const TypeList = ({types}) => {
 
 
 
-
   return (
-    <FlatList 
+    <>
+    {types.map( (t,i) => {
+                    const color = getTypeCouleur(t)
+                    return (
+                        <View key={i} >
+                            <Text style={{backgroundColor:color}}>{t}</Text>
+                        </View>
+                    )
+    })}        
+    
+
+
+    {/* <FlatList 
         data={types}
         keyExtractor={(item,index) => index}
         renderItem={ ({item}) => {
@@ -19,7 +30,9 @@ const TypeList = ({types}) => {
                 </View>
             )
         }}
-    />
+    /> */}
+
+    </>
   )
 }
 
