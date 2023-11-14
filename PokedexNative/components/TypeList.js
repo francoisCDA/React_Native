@@ -4,21 +4,17 @@ import React from 'react'
 
 const TypeList = ({types}) => {
 
-
-
   return (
     <>
     {types.map( (t,i) => {
                     const color = getTypeCouleur(t)
                     return (
                         <View key={i} >
-                            <Text style={{backgroundColor:color}}>{t}</Text>
+                            <Text style={[styles.type,{backgroundColor:color}]}>{t}</Text>
                         </View>
                     )
     })}        
     
-
-
     {/* <FlatList 
         data={types}
         keyExtractor={(item,index) => index}
@@ -31,14 +27,23 @@ const TypeList = ({types}) => {
             )
         }}
     /> */}
-
     </>
   )
 }
 
 export default TypeList
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    type: {
+        padding:6,
+        textAlign:'center',
+        fontSize:16,
+        marginBottom:5,
+        borderRadius:15,
+        fontWeight:'600',
+        color:'#111'
+    }
+})
 
 function getTypeCouleur(type) {
     switch (type) {

@@ -18,7 +18,7 @@ const Pokedex = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Pokedex</Text>
+
     <FlatList 
         data={pokedex}
         keyExtractor={ (item, index) => index }

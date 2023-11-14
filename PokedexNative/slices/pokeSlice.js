@@ -44,6 +44,18 @@ export const axiosGetPokemonByUrl = createAsyncThunk(
     }
 )
 
+export const axiosGetExtraPokemon = createAsyncThunk(
+    'pokemon/axiosGetExtraPokemon',
+    async (nom) => {
+        try {
+            const reponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${nom}`);
+            return reponse.data
+        } catch (error) {
+            console.error(error)
+        }
+    }
+)
+
 export const axiosDataSpecies = createAsyncThunk(
     'pokemon/axiosDataSpecies',
     async (id) => {
@@ -62,6 +74,7 @@ const pokeSlice = createSlice({
     name: 'pokemon',
     initialState: {
         pokedex: [],
+        pokedexExtra:{},
         pokespecies: {},
         pokeball: [],
     },
@@ -91,7 +104,11 @@ const pokeSlice = createSlice({
             const dataSpecies = speciesExtractData(action.payload.data);
 
             state.pokedex[`${action.payload.id}`] = dataSpecies;
-
+        })
+        builder.addCase(axiosGetExtraPokemon.fulfilled, (state,action) => {
+            const pokeData = pokeExtractData(action.payload);
+            console.log('extra.pokemon ',pokeData.image);
+            state.pokedexExtra[pokeData.nom] = pokeData.image;
         })
     }
 })

@@ -1,21 +1,24 @@
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import axios from 'axios'
 
 const EvolutionChain = ({chain}) => {
 
-   const {pokedex} = useSelector(state => state.pokemon )
+   const {pokedex, pokedexExtra } = useSelector(state => state.pokemon )
 
    const getUrlImage = (nom) => {
     const poke = pokedex.find( poke => poke.nom == nom)
-    console.log('sprite evolution ',poke.image)
-    return poke.image
+    if (poke != undefined) {
+        return poke.image
+    } else {
+        return pokedexExtra[`${nom}`];
+    }
    }
 
 
   return (
-     <View>
-        <Text>EvolutionChain</Text>
+     <View style={styles.container}>
         <FlatList 
             data={chain}    
             keyExtractor={(item,index) => index}
@@ -24,14 +27,14 @@ const EvolutionChain = ({chain}) => {
                 const urlImage = getUrlImage(item)
 
                 return (
-                    <View>
+                    <View style={styles.spriteContainer}>
                         <Image 
                             source={{
                                 uri: urlImage,
                             }}
                             style={styles.sprite}
                         />
-                        <Text>{item}</Text>
+                        <Text style={styles.titre}>{item}</Text>
                     </View>
                 )
             }}
@@ -45,8 +48,19 @@ const EvolutionChain = ({chain}) => {
 export default EvolutionChain
 
 const styles = StyleSheet.create({
+    container: {
+        alignItems:'center',
+        marginBottom:15,
+    },
     sprite :{
         width: 120,
         height: 120,
+    },
+    spriteContainer:{
+        alignItems:'center',
+    },
+    titre: {
+        fontSize: 18,
+        textTransform:'capitalize',
     }
 })

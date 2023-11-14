@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native'
+import { StyleSheet, Text, View, Pressable, Image } from 'react-native'
 import React, { useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,14 +30,20 @@ const Home = ({navigation}) => {
 
 
   return (
-    <View>
-      <Text>Attrapez les tous</Text>
-      <View>
+    <View style={styles.container}>
+      <Image 
+        source={
+          {uri:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png'}
+        }
+        style={styles.bandeau}
+      />
+      <Text style={styles.sousTitre}>Attrapez les tous !</Text>
+      <View style={styles.subContainer}>
         <Pressable onPress={() => navigation.navigate('pokedex')} >
-            <Text>Pokedex ({pokedex.length})</Text>
+            <Text style={[styles.section,{backgroundColor:'#ee5555'}]}>Pokedex ({pokedex.length})</Text>
         </Pressable>
         <Pressable onPress={() => navigation.navigate('pokeball')}>
-            <Text>Pokeball ({pokeball.length})</Text>
+            <Text style={[styles.section,{backgroundColor:'#5555ee'}]}>Pokeball ({pokeball.length})</Text>
         </Pressable>
       </View>
     </View>
@@ -46,4 +52,33 @@ const Home = ({navigation}) => {
 
 export default Home
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    backgroundColor:'#999999',
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  subContainer: {
+    flexDirection:'row',
+    justifyContent:'space-evenly',
+    width:'95%',
+    //backgroundColor:'red'
+  },
+  section: {
+    fontSize: 25,
+    fontWeight:'700',
+    padding:12,
+    borderRadius:15,
+    color:'#eeeeee'
+  },
+  bandeau: {
+    width:"95%",
+    height:140,
+  },
+  sousTitre: {
+    fontSize:32,
+    marginBottom:50,
+  }
+
+})

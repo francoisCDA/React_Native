@@ -25,6 +25,7 @@ export default Header
 const styles = StyleSheet.create({
     container : {
         width: '100%',
+        paddingTop:12,
     },
     subContainer : {
         flexDirection:'row',
@@ -38,8 +39,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 25,
         textTransform:'capitalize',
-        color:'#000',
+        color:'#EEE',
         fontWeight:'900',
+        marginLeft:12,
     },
     sprite: {
         width:150,

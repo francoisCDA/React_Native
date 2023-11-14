@@ -41,10 +41,10 @@ const Etiquette = ({nom,types,spriteUrl,speciesUrl}) => {
  
 
   return (
-      <View style={[styles.container,{backgroundColor: species.couleur}]}>
-            <Pressable onPress={() => netscape.navigate('pokemon',nom)} >
+            <Pressable onPress={() => netscape.navigate('pokemon',nom)} style={[styles.container,{backgroundColor: species.couleur}]} >
+      <View style={styles.containerFlex} >
                 <View>
-                    <Text>{nom}</Text>
+                    <Text style={styles.titre}>{nom}</Text>
                     <TypeList types={types} />
                 </View>
                 <View>
@@ -53,8 +53,8 @@ const Etiquette = ({nom,types,spriteUrl,speciesUrl}) => {
                         style={styles.sprite}
                     />
                 </View>
-            </Pressable>
         </View>
+            </Pressable>
   )
 }
 
@@ -62,16 +62,26 @@ export default Etiquette
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection:'row',
-        justifyContent:'space-around',
-     
         width:'40%',
         margin:10,
         padding:12,
-        borderRadius:8,
+        borderRadius:15,
+        elevation:8,
+        shadowColor:"#000"
+    },
+    containerFlex :{
+       alignItems:'center',
+        justifyContent:'space-around',
+    },
+    titre: {
+        fontSize:22,
+        fontWeight:'700',
+        textTransform:'capitalize',
+        marginBottom:12,
+        color:"#222"
     },
     sprite: {
-        width:60,
-        height:60,
+        width:90,
+        height:90,
     }
 })
