@@ -18,7 +18,6 @@ const Pokemon = ({route, navigation}) => {
   const {pokedex, pokespecies } = useSelector(state => state.pokemon)
   const pokemon = pokedex.find(poke => poke.nom == route.params)
 
-
   //console.log('urlchaine ',pokemon.evolutionChainUrl)
 
   useEffect( () => {
@@ -39,7 +38,7 @@ const Pokemon = ({route, navigation}) => {
             pokeChain.push(reponse.data.chain.evolves_to[0].evolves_to[0].species.name)
           }
         }
-        console.log('nouvelle chaine d evolution',pokeChain)
+      //  console.log('nouvelle chaine d evolution',pokeChain)
 
         pokeChain.forEach( poke => {
           const idx = pokedex.findIndex(pkx => pkx.nom == poke)
@@ -47,8 +46,7 @@ const Pokemon = ({route, navigation}) => {
           if (idx == -1) {
             dispatch(axiosGetExtraPokemon(poke))
           }
-
-          
+         
         })
 
         dispatch(saveEvolutionChain({url: pokemon.evolutionChainUrl,chain:pokeChain}))
@@ -57,8 +55,8 @@ const Pokemon = ({route, navigation}) => {
       .catch (error => console.log(error))
 
     } else {
-      console.log('chaine d évolution connue')
-      console.log(pokespecies[pokemon.evolutionChainUrl])
+      //console.log('chaine d évolution connue')
+      //console.log(pokespecies[pokemon.evolutionChainUrl])
       //setEvolvChain([...pokespecies[pokemon.evolutionChainUrl]])
     }
   })

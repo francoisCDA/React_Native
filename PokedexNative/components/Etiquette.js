@@ -36,12 +36,11 @@ const Etiquette = ({ nom, types, spriteUrl, speciesUrl }) => {
             console.log('pokemon déjà connu');
         }
 
-
     }, []);
 
 
     const colorTxt = () => {
-        if (species.couleur == 'blue') {
+        if (species.couleur == 'blue' || species.couleur == 'purple'|| species.couleur == 'brown' || species.couleur == 'green' || species.couleur == 'red' ) {
             return { color: "#eee" }
         }
 
